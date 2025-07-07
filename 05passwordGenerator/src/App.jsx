@@ -70,7 +70,7 @@ function App() {
           defaultChecked={charAllowed}
           id="charInput"
           onChange={() => {
-            setCharAllowed((prev) => {!prev}); //we just reverse the previous value
+            setCharAllowed((prev) => {!prev}); //we just reverse the previous value(we fired a callback here to propagate change)
           }} 
           />
           <label>Characters</label>
