@@ -13,12 +13,15 @@ function App() {
           <div className="flex flex-wrap justify-center gap-3 shadow-lg bg-white px-3 py-2 rounded-2xl">
             <button className="outline-none px-4 py-1 rounded-2xl text-white shadow-lg"
             style={{backgroundColor: "Red"}}
+            onClick={() => setColor("red")}
             >Red</button>
             <button className="outline-none px-4 py-1 rounded-2xl text-white shadow-lg"
             style={{backgroundColor: "Green"}}
+            onClick={() => setColor("green")}
             >Green</button>
             <button className="outline-none px-4 py-1 rounded-2xl text-white shadow-lg"
             style={{backgroundColor: "Blue"}}
+            onClick={() => setColor("blue")}
             >Blue</button>
           </div>
         </div>
