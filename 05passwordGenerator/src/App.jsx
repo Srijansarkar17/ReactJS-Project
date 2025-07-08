@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 import './App.css'
 
@@ -8,7 +8,7 @@ function App() {
   const [charAllowed, setCharAllowed] = useState(false)
   const [password, setPassword] = useState("")
 
-  const passwordGenerator = useCallback(() => {
+  const passwordGenerator = useCallback(() => { //this is just used to optimize, otherwise we can also use useEffect only
     let pass = ""
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     if(numberAllowed){
@@ -21,12 +21,15 @@ function App() {
       let char = Math.floor(Math.random() * str.length + 1) //we get a random number(index of array)
       //Math.random() * str.length -> Give me a random number between 0 and the length of the string
       //+1 is done to avoid starting from 0
-      pass = str.charAt(char) //we get the character at the position the random just generated
+      pass += str.charAt(char) //we get the character at the position the random just generated
     }
     setPassword(pass)
 
   }, [length, numberAllowed, charAllowed, setPassword])
 
+  useEffect(() => { //to run the code
+    passwordGenerator()
+  }, [length, numberAllowed, charAllowed, passwordGenerator])
   return (
     <>
       <div className='w-full max-w-md mx-auto shadow-md rounded-lg px-4 my-8 text-orange-500 bg-gray-700'>
@@ -59,7 +62,7 @@ function App() {
           defaultChecked={numberAllowed}
           id="numberInput"
           onChange={() => {
-            setnumberAllowed((prev) => {!prev}); //we just reverse the previous value
+            setnumberAllowed((prev) => !prev); //we just reverse the previous value
           }} 
           />
           <label>Numbers</label>
@@ -70,7 +73,7 @@ function App() {
           defaultChecked={charAllowed}
           id="charInput"
           onChange={() => {
-            setCharAllowed((prev) => {!prev}); //we just reverse the previous value(we fired a callback here to propagate change)
+            setCharAllowed((prev) => !prev); //we just reverse the previous value(we fired a callback here to propagate change)
           }} 
           />
           <label>Characters</label>
